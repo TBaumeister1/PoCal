@@ -1,3 +1,9 @@
+bin/
+.settings/
+.classpath
+.project
+poker_matrix
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
