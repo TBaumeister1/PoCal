@@ -3,93 +3,43 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Main_Class {
-	public static void main(String[] args){
-		
-		//Declare your hand.
+public class Program {
+	private Deck deck;
+	
+	public static void main(String[] args) {
+		Deck deck = new Deck();
+		Program program = new Program(deck);
+		program.run();
+	}	
+	
+	public Program(Deck deck) {
+		this.deck = deck;
+	}
+	
+	private String declareHand() {
 		Scanner hand = new Scanner(System.in);
 		System.out.println("Enter your hand:");
 		String your_hand = hand.next();
 		System.out.println(your_hand + " is your hand \n");
 		
-        //Initiate combo's in HashMap
-		HashMap<String, Integer> combos = new HashMap<String, Integer>();
-		combos.put("A", 4);
-		combos.put("K", 4);
-		combos.put("Q", 4);
-		combos.put("J", 4);
-		combos.put("T", 4);
-		combos.put("9", 4);
-		combos.put("8", 4);
-		combos.put("7", 4);
-		combos.put("6", 4);
-		combos.put("5", 4);
-		combos.put("4", 4);
-		combos.put("3", 4);
-		combos.put("2", 4);
+		return your_hand;
+	}
+	
+	private void removeFromDeck(String your_hand) {
 		
-		char card_1_yours = your_hand.charAt(0);
-		char card_2_yours = your_hand.charAt(1);
+		String card_1_yours = String.valueOf(your_hand.charAt(0));
+		String card_2_yours = String.valueOf(your_hand.charAt(1));
 		
-		switch (card_1_yours){
-		case 'A': combos.put("A", combos.get("A") - 1);
-		break;
-		case 'K': combos.put("K", combos.get("K") - 1);
-		break;
-		case 'Q': combos.put("Q", combos.get("Q") - 1);
-		break;
-		case 'J': combos.put("J", combos.get("J") - 1);
-		break;
-		case 'T': combos.put("T", combos.get("T") - 1);
-		break;
-		case '9': combos.put("9", combos.get("9") - 1);
-		break;
-		case '8': combos.put("8", combos.get("8") - 1);
-		break;
-		case '7': combos.put("7", combos.get("7") - 1);
-		break;
-		case '6': combos.put("6", combos.get("6") - 1);
-		break;
-		case '5': combos.put("5", combos.get("5") - 1);
-		break;
-		case '4': combos.put("4", combos.get("4") - 1);
-		break;
-		case '3': combos.put("3", combos.get("3") - 1);
-		break;
-		case '2': combos.put("2", combos.get("2") - 1);
-		break;
-		default: System.out.println("Your hand consist of a card which cannot be a legitimate card");
-		}
+		this.deck.removeCard(card_1_yours);
+		this.deck.removeCard(card_2_yours);
+	}
+
+	
+	public void run()
+	{
+		String your_hand = this.declareHand();
+		this.removeFromDeck(your_hand);
 		
-		switch (card_2_yours){
-		case 'A': combos.put("A", combos.get("A") - 1);
-		break;
-		case 'K': combos.put("K", combos.get("K") - 1);
-		break;
-		case 'Q': combos.put("Q", combos.get("Q") - 1);
-		break;
-		case 'J': combos.put("J", combos.get("J") - 1);
-		break;
-		case 'T': combos.put("T", combos.get("T") - 1);
-		break;
-		case '9': combos.put("9", combos.get("9") - 1);
-		break;
-		case '8': combos.put("8", combos.get("8") - 1);
-		break;
-		case '7': combos.put("7", combos.get("7") - 1);
-		break;
-		case '6': combos.put("6", combos.get("6") - 1);
-		break;
-		case '5': combos.put("5", combos.get("5") - 1);
-		break;
-		case '4': combos.put("4", combos.get("4") - 1);
-		break;
-		case '3': combos.put("3", combos.get("3") - 1);
-		break;
-		case '2': combos.put("2", combos.get("2") - 1);
-		break;
-		default: System.out.println("Your hand consist of a card which cannot be a legitimate card");
-		}
 		
 		//Declare the variable number_opponents.
 		Scanner opp = new Scanner(System.in);
@@ -663,5 +613,5 @@ public class Main_Class {
 		String[] R8_range = R8_string.split(" ");
 		System.out.println(Arrays.toString(R8_range) + " is the range of R8 \n");
 		}		
-	}	
+	}
 }
