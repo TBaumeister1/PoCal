@@ -1,7 +1,5 @@
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Program
 {
@@ -75,16 +73,15 @@ public class Program
             }
 
             double total = Arrays.stream(chances).sum();
-            System.out.println(String.format("Sum of chances = %f", total));
-            System.out.println("Chances: " + "\n" + Arrays.toString(chances) + "\n");
+            System.out.println(String.format("Sum of chances = %f", total) + " and should be 1\n");
 
-            Arrays.stream(range).map(hand -> chances)
+            Arrays.stream(range).map(hand -> chances);
 
             //Only add the calculations of the range
             double[] array_chances_R1 = new double[91];
             for (int m = 0; m < array_chances_R1.length; m++)
             {
-                if (array_check_R1[m] == true)
+                if (range[m].equals(allHands[m])) //This needs to change, so only the hands in "range" will be taken.
                 {
                     array_chances_R1[m] = chances[m];
                 }
@@ -93,13 +90,12 @@ public class Program
                     array_chances_R1[m] = 0;
                 }
             }
-            System.out.println(
-                "chances check of R1: " + "\n" + Arrays.toString(array_chances_R1) + "\n");
+            System.out.println("Chances: " + "\n" + Arrays.toString(array_chances_R1) + "\n");
 
-            float ANSWER = 0;
+            double ANSWER = 0;
             for (int n = 0; n < array_chances_R1.length; n++)
             {
-                ANSWER += array_chances_R1[n];
+                ANSWER += array_chances_R1[n]; //This should be 100% if the range consist of all possible hands, but long or double data types aren't perfect. Hence, it shows a number close to 100%.
             }
             System.out.println("The answer is " + ANSWER + ", which is " + ANSWER * 100 + "% \n");
 
@@ -534,12 +530,29 @@ public class Program
 
     private String[] declareRange(int opponent)
     {
-        System.out.println(String.format("Enter the range of opponent %d:", opponent));
+        System.out.println(String.format("Enter the range of opponent %d:", opponent) + "\n");
         Scanner input = new Scanner(System.in);
         String string = input.nextLine();
+        String[] range_hands = string.split("[ */.,;:]");
+        String[] allHands = this.getAllHands();
+        String[] range = new String[91];
+        for(int l = 0; l < range.length; l++)
+        {
+            range[l] = "..";
+        }
 
-        String[] range = string.split(" ");
-        System.out.println(Arrays.toString(range) + String.format(" is the range of R%d \n", opponent));
+        for(int i = 0; i < allHands.length; i++)
+        {
+            for(int k = 0; k < range_hands.length; k++)
+            {
+                if(allHands[i].equals(range_hands[k]))
+                {
+                    range[i] = allHands[i];
+                }
+            }
+        }
+
+        System.out.println(String.format("Range R%d is", opponent) + "\n" + Arrays.toString(range) + "\n");
 
         return range;
     }
@@ -547,15 +560,15 @@ public class Program
     private int setNumOpponents()
     {
         Scanner opp = new Scanner(System.in);
-        System.out.println("Enter the number of opponents behind you (from 0 to 8):");
+        System.out.println("Enter the number of opponents behind you (from 1 to 8):");
         int number_opponents = opp.nextInt();
-        if (number_opponents <= 8 && number_opponents >= 0)
+        if (number_opponents <= 8 && number_opponents > 0)
         {
             System.out.println(number_opponents + " opponents are behind you \n");
         }
         else
         {
-            number_opponents = 0;
+            number_opponents = 1;
             System.out.println(
                 "Not a legitimate number, so number_opponents will be " + number_opponents);
         }

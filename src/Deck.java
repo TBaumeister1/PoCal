@@ -22,7 +22,7 @@ public class Deck {
 		this.deck.put('2', 4);
 	}
 
-    public int addCard(char card)
+    public int addCard(char card) //Is used, because after each for loop in the chance calculations you'll get the right deck again.
     {
         int numberOfCards = this.deck.get(card) + 1;
         this.deck.put(card, numberOfCards);
