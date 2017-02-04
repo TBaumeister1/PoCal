@@ -81,7 +81,7 @@ public class Program
             double[] array_chances_R1 = new double[91];
             for (int m = 0; m < array_chances_R1.length; m++)
             {
-                if (range[m].equals(allHands[m])) //This needs to change, so only the hands in "range" will be taken.
+                if (range[m].equals(allHands[m]))
                 {
                     array_chances_R1[m] = chances[m];
                 }
